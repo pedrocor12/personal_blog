@@ -8,6 +8,134 @@ summary: The Time Traveller (for so it will be convenient to speak of him) was
   twinkled, and his usually pale face was flushed and animated...
 ---
 
-_Source_Code_: [Project Gutenberg](https://www.gutenberg.org/ebooks/35)
+_Source_Code_: [Repo](https://github.com/pedrocor12/Vitproject)
+
 
 ## Introduction
+
+In the realm of machine learning, achieving high performance in computer vision tasks often requires a delicate balance between accuracy and computational efficiency. The "Efficient Vision Transformers" project explores the adaptation of transformer architectures originally designed for natural language processing (NLP) to meet the demands of visual data processing.
+
+Transformers, renowned for their capacity to capture intricate dependencies in sequential data, have demonstrated significant success in NLP applications. However, applying these models to vision tasks poses considerable computational challenges due to their large memory footprint and intensive computational requirements.
+
+## Project Objectives
+
+The primary goal of this project was to adapt and optimize Vision Transformer (ViT) models to improve their resource efficiency without compromising accuracy. Key objectives included establishing benchmarks to evaluate the performance of optimized lightweight ViTs in terms of accuracy, inference time, and memory usage.
+
+The optimized ViT models were evaluated in practical settings, specifically within OpenAI Gym’s Pong game, to assess their operational efficacy in terms of robustness, responsiveness, and energy efficiency. This evaluation aimed to gauge their potential to reduce energy requirements in AI operations and enhance accessibility to advanced AI technologies on less capable devices, thereby promoting sustainability and digital equity.
+
+
+## Method 
+
+Since these methods focus on optimizing Vision Transformer (ViT) architectures initially designed for natural language processing (NLP) for visual data tasks.
+
+The process begins with pre-training the ViT models using supervised learning on expert-labeled datasets before exposing them to interactive environments. The following code snippet demonstrates how to generate expert data.
+
+
+```python
+
+import numpy as np
+import tensorflow as tf
+import cv2
+import gym
+import os
+
+ROWS = 80
+COLS = 80
+REM_STEP = 4
+state_size = (REM_STEP, ROWS, COLS)
+
+def GetImage(frame, image_memory):
+    if image_memory.shape == (1, *state_size):
+        image_memory = np.squeeze(image_memory)
+        
+    frame_cropped = frame[35:195:2, ::2,:]
+    if frame_cropped.shape[0] != COLS or frame_cropped.shape[1] != ROWS:
+        frame_cropped = cv2.resize(frame, (COLS, ROWS), interpolation=cv2.INTER_CUBIC)
+
+    frame_rgb = 0.299 * frame_cropped[:,:,0] + 0.587 * frame_cropped[:,:,1] + 0.114 * frame_cropped[:,:,2]
+
+    frame_rgb[frame_rgb < 100] = 0
+    frame_rgb[frame_rgb >= 100] = 255
+    new_frame = np.array(frame_rgb).astype(np.float32) / 255.0
+
+    image_memory = np.roll(image_memory, 1, axis = 0)
+    image_memory[0,:,:] = new_frame
+
+    return np.expand_dims(image_memory, axis=0)
+
+
+def reset(env):
+    image_memory = np.zeros(state_size)
+    frame = env.reset()
+    for i in range(REM_STEP):
+        state = GetImage(frame, image_memory)
+
+    return state
+
+
+def step(action, env, image_memory):
+    next_frame, reward, done, info = env.step(action)
+    next_state = GetImage(next_frame, image_memory)
+
+    return next_state, reward, done, info
+
+
+env = gym.make('PongDeterministic-v4')
+imported = tf.saved_model.load("Models/PongDeterministic-v4_A3C_0.0001")
+model = imported.signatures["serving_default"]
+
+render = True
+
+for episode in range(0, 10000):
+    score = 0
+    done = False
+    
+    state = reset(env)
+
+    episode_list = []
+    action_list = []
+    reward_list = []
+    done_list = []
+    step_list = []
+    state_list = []
+    while not done:
+        if render:
+            env.render()
+
+        prediction = model(input_1 = tf.constant(state, dtype=tf.float32))
+        prediction = prediction['output_1']
+        
+        action = tf.random.categorical(prediction, 1).numpy()
+        action = action[0]
+
+        next_state, reward, done, _ = step(action, env, state)
+
+        episode_list.append(episode)
+        action_list.append(action)
+        reward_list.append(reward)
+        done_list.append(done)
+        step_list.append(step)
+        state_list.append(state)
+
+        score += reward
+        state = next_state
+        
+    save_data = {'episode': episode, 'step': step_list, 'state': state_list, 
+                 'action': action_list, 'reward': reward_list, 'done': done_list}
+
+    save_path = 'expert_data/pong'
+    save_file = 'data_' + str(episode) + '.npy'
+    path_npy = os.path.join(save_path, save_file)
+    isExist = os.path.exists(save_path)
+    if not isExist:
+       # Create a new directory because it does not exist
+       os.makedirs(save_path)
+       print("The new directory is created!")
+    
+    np.save(path_npy, save_data)
+        
+    print("episode: {0}, score: {1}".format(episode, score))
+
+
+
+
