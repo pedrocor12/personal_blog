@@ -18,7 +18,7 @@ export default function Footer() {
           <div>{` • `}</div>
           <Link href="/">{siteMetadata.title}</Link>
         </div>
-              </div>
+      </div>
     </footer>
   )
 }
