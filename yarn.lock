@@ -117,7 +117,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@algolia/client-search@npm:4.24.0":
+"@algolia/client-search@npm:4.24.0, @algolia/client-search@npm:^4.24.0":
   version: 4.24.0
   resolution: "@algolia/client-search@npm:4.24.0"
   dependencies:
@@ -3540,7 +3540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"algoliasearch@npm:^4.19.1":
+"algoliasearch@npm:^4.19.1, algoliasearch@npm:^4.24.0":
   version: 4.24.0
   resolution: "algoliasearch@npm:4.24.0"
   dependencies:
@@ -10951,6 +10951,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tailwind-nextjs-starter-blog@workspace:."
   dependencies:
+    "@algolia/client-search": ^4.24.0
     "@headlessui/react": 1.7.19
     "@next/bundle-analyzer": 14.2.3
     "@svgr/webpack": ^8.0.1
@@ -10960,6 +10961,7 @@ __metadata:
     "@types/react": ^18.2.73
     "@typescript-eslint/eslint-plugin": ^6.1.0
     "@typescript-eslint/parser": ^6.1.0
+    algoliasearch: ^4.24.0
     autoprefixer: ^10.4.13
     contentlayer2: 0.4.6
     cross-env: ^7.0.3
