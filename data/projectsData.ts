@@ -1,12 +1,12 @@
 interface Project {
-  title: string,
-  description: string,
-  href?: string,
-  imgSrc?: string,
+  title: string
+  description: string
+  href?: string
+  imgSrc?: string
 }
 
 const projectsData: Project[] = [
-    {
+  {
     title: 'Efficient Vision Transformers',
     description: `The project aimed to explore and optimize lightweight Vision Transformer (ViT) models specifically
 tailored for resource-constrained environments. The primary focus was on enhancing the efficiency
