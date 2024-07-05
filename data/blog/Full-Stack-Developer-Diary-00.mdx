@@ -1,0 +1,32 @@
+--- 
+title : 'Full-Stack-Engineer-Diary-00.mdx'
+date : '2024-07-05'
+tags : ['Diary', 'Software Engineering']
+draft : false 
+Summary : The journey to becoming a software engineering sensei.
+___
+
+## Developer Diary Entry
+
+Today marks the beginning of my journey to becoming the best version of a full stack engineer. As market demands continue to rise, I have decided to further my knowledge by enrolling in a summer course at the University of Helsinki's Full Stack program.
+
+As a result, I revisited some foundational concepts about the internet and the interaction between client and server sides. The course began by explaining the old style of web development, where multiple requests and complex AJAX methods were used to communicate with the server. This approach often resulted in a high number of server requests, leading to inefficiencies and a more complex development process.
+
+The course then transitioned into explaining the development and advantages of Single Page Applications (SPAs). Unlike the traditional approach, SPAs load a single HTML page and dynamically update content as the user interacts with the app. This method significantly reduces the number of server requests and provides a smoother, faster user experience.
+
+Overall, understanding this transition from traditional multi-request applications to SPAs has been insightful, reinforcing the importance of efficient web development practices.
+
+Additionally, I revisited important foundational HTTP methods, `GET` and `POST`. Even though I was familiar with these methods, I found it crucial to solidify my knowledge. This led me to learn about idempotent and non-idempotent methods.
+
+### Understanding Idempotency in HTTP Methods
+
+Idempotent (in the context of HTTP methods) refers to an operation that can be performed multiple times without changing the result beyond the initial application. In other words, an idempotent operation produces the same outcome no matter how many times it is repeated.
+
+Here’s how it applies to HTTP methods:
+
+- **GET**: Idempotent because requesting the same resource multiple times does not change the resource.
+- **PUT**: Idempotent because updating a resource with the same data multiple times does not change the result after the first update.
+- **DELETE**: Idempotent because deleting a resource that is already deleted (or doesn’t exist) has the same effect as deleting it once.
+
+Non-idempotent methods, like **POST**, can lead to different outcomes if executed multiple times. For instance, submitting the same form multiple times might create multiple entries in a database.
+
