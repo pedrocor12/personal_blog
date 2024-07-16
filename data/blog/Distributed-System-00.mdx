@@ -1,0 +1,31 @@
+---
+title: 'Deep Dive Distributed Systems 0'
+date: '2024-07-16'
+tags: ['Book', 'Understanding Distributed Systems']
+draft: false
+summary: Chapter 0 Notes (Understanding Distributed Systems)
+---
+
+# Distributed Systems
+
+Distributed systems can be viewed from various perspectives.
+From the *physical* perspective, a distributed system consists 
+of multiple machines communicating over network links.
+
+At run-time, a distributed system can be seen as processes
+communicating via inter-process communication (IPC) mechanisms,
+such as HTTP, hosted on different machines.
+
+At the implementation level, a distributed system comprises
+loosely-coupled components that can be scaled and deployed
+independently. These components are referred to as services.
+
+A service implements a specific part of the system's overall
+capabilities. At its core, a service contains the logic for
+exposing interfaces used to communicate with the outside world.
+
+Interfaces can be classified as inbound, defining the operations
+that the service offers to clients, and outbound, defining the
+operations that services use to communicate with external services
+, such as data stores and messaging services.
+
