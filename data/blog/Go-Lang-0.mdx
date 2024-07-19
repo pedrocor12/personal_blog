@@ -19,7 +19,7 @@ import (
 func main() {
   fmt.Println("My favorite number is", rand.Intn(10))
 }
-
+```
 
 The program above is using packages fmt and math/rand. By convention, the package name is the same as the last element of the import path. In the example above, package math/rand comprises files that begin with the statement package rand. In the example above, rand is the package for random numbers where Intn returns an int, a non-negative pseudo-random number in the half-open interval [0,n). It panics if n <= 0.
 
@@ -74,4 +74,112 @@ func swap(x, y string) (string, string) {
   return y, x
 }
 ```
-The swap function returns two strings
+
+The swap function returns two strings.
+
+Go's allows for values that are returned to be named. if so, they're treated as variables
+defined at the top of the function 
+
+```go
+
+package main
+
+func split(sum int) (x, y int) {
+    x = sum * 4 / 9
+    y = sum - x 
+    return
+  }
+```
+The names are used to document the meaning of the return values.
+* A return statment without arguments returns the named return values
+* This is known as a "naked" return.
+
+Naked return satements should be used only in short functions,
+as the example shown above. They can harm readability in longer functions.
+
+We can declare a list of variables, as in funcitons argument lists, the type is last
+
+
+```go 
+
+import "fmt"
+
+var c , python, java bool 
+
+func main() {
+    var i int 
+    fmt.Println(i, c, python, java)
+  }
+```
+As values printed were not assigned values , notice that when printed to the console,
+it returns a 0 , and for the c, python, java returns false as values that are not assgined 
+a value will return 0
+
+## Variables with Initializers 
+
+Variables can include initializers
+* if the initializer is present the type can be omitted
+
+```go 
+package main
+
+var i, j, int = 1, 2 
+
+func main() {
+    var c, python, java = true, false , "no!"
+    fmt.Println(i, j, c, python, java)
+  }
+```
+
+## Short variables declarations
+
+Inside a function we can use the := short assignment instead of using the var
+declaration with implicit type.
+
+Outside the function, every statement, begins with a keyword (var, func, and so on) 
+and so the := consturct is not available. 
+
+```go 
+package main 
+import "fmt"
+
+func main() {
+    var i, j int = 1, 2 
+    k := 3 
+    c, python, java := true, false, "no!"
+    fmt.Println(i, j, k, c, python, java)
+  }
+```
+
+
+## Basic types
+
+```go 
+bool
+
+string 
+
+int int8 int16 int32 int64
+
+uint uint8 uint16 uint32 uint64 uintptr
+
+byte // alias for uint8
+
+rune // alias for int32
+    // represents a Unicode code point
+
+float32 float64
+
+complex64 complex128
+```
+
+We can use the basic types and declarations factored into blocks 
+
+```go 
+var (
+  a int 
+  b string 
+  c float
+)
+```
+
