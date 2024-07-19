@@ -39,4 +39,58 @@ import "math"
 
 ```
 
+In Go, a name is exported if it begins with a capital letter. For example Pizza
+is exported name, as Pi, which is exported from the math package:
+
+-pizza and pi do not start with a capital letter , so they are not exported.
+-when importing a package, we can not refer only to its exported names. Any "unexported"
+names are not accessible from outside the package.
+
+
+
+A function in Go can take zero or more arguments. We can 
+notice that the type comes after the variable name.
+
+```Go 
+package main
+
+import "fmt"
+
+func add(x int, y int) int {
+    return x + y
+  }
+
+func main() {
+    fmt.Println(add(42, 13))
+  }
+
+```
+
+we can omit the type when two consecutive named function paramters share a type 
+
+```Go 
+x int , y int 
+
+
+to x , y int 
+
+func add(x , y int) int {
+
+  }
+
+```
+
+A function can return any number of results
+
+```Go 
+func swap(x, y string) (string, string) {
+    return y, x
+  }
+```
+
+The swap function returns two strings
+
+
+
+
 
