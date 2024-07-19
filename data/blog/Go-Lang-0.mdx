@@ -1,0 +1,34 @@
+--- 
+title : 'Go-lang-Basics.mdx'
+date : '2024-07-19'
+tags : ['Software Engineering','Golang']
+draft : false 
+summary : Go Basics.
+___
+
+Every Go program is made up of packages. Similar to other languages where by convention
+we start running the program in the main package in Go the same happens.
+
+```python 
+package main
+
+import (
+  'fmt'
+  "math/rand"
+)
+
+func main() {
+	fmt.Println("My favorite number is", rand.Intn(10))
+}
+
+```
+
+The program above is using packages 'fmt' and 'math/rand', by convention
+the package name is the same as the last element of the import path, in the 
+example above package 'math/rand' compromises files that begin with the 
+statement package rand in the example above rand is the package for random
+numbers where Intn returns as int , a non-negative pseudo-random number in 
+the half-open interval [0,n) according to the source code. It panics if n <= 0 .
+
+
+
