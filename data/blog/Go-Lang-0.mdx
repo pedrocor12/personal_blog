@@ -1,10 +1,10 @@
 ---
-title : 'Go-lang-Basics.mdx'
-date : '2024-07-19'
-tags : ['Software Engineering','Golang']
-draft : false 
-summary : Go Basics.
-___
+title: 'Go-lang-Basics.mdx'
+date: '2024-07-19'
+tags: ['Software Engineering','Golang']
+draft: false
+summary: Go Basics.
+---
 
 Every Go program is made up of packages. Similar to other languages where by convention
 we start running the program in the main package in Go the same happens.
@@ -30,5 +30,13 @@ statement package rand in the example above rand is the package for random
 numbers where Intn returns as int , a non-negative pseudo-random number in 
 the half-open interval [0,n) according to the source code. It panics if n <= 0 .
 
+Imports are grouped in parenthesized, "factored" import statements. However,
+we can also do imports in the following format:
+
+```Golang
+import "fmt"
+import "math"
+
+```
 
 
