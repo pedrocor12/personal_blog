@@ -1,96 +1,77 @@
 ---
 title: 'Go-lang-Basics.mdx'
 date: '2024-07-19'
-tags: ['Software Engineering','Golang']
+tags: ['Software Engineering', 'Golang']
 draft: false
-summary: Go Basics.
+summary: 'Go Basics.'
 ---
 
-Every Go program is made up of packages. Similar to other languages where by convention
-we start running the program in the main package in Go the same happens.
+Every Go program is made up of packages. Similar to other languages where by convention we start running the program in the main package, in Go the same happens.
 
-```python 
+```go
 package main
 
 import (
-  'fmt'
+  "fmt"
   "math/rand"
 )
 
 func main() {
-	fmt.Println("My favorite number is", rand.Intn(10))
+  fmt.Println("My favorite number is", rand.Intn(10))
 }
 
-```
 
-The program above is using packages 'fmt' and 'math/rand', by convention
-the package name is the same as the last element of the import path, in the 
-example above package 'math/rand' compromises files that begin with the 
-statement package rand in the example above rand is the package for random
-numbers where Intn returns as int , a non-negative pseudo-random number in 
-the half-open interval [0,n) according to the source code. It panics if n <= 0 .
+The program above is using packages fmt and math/rand. By convention, the package name is the same as the last element of the import path. In the example above, package math/rand comprises files that begin with the statement package rand. In the example above, rand is the package for random numbers where Intn returns an int, a non-negative pseudo-random number in the half-open interval [0,n). It panics if n <= 0.
 
-Imports are grouped in parenthesized, "factored" import statements. However,
-we can also do imports in the following format:
+Imports are grouped in parenthesized, "factored" import statements. However, we can also do imports in the following format:
 
-```Golang
+
+```go
 import "fmt"
 import "math"
-
 ```
 
-In Go, a name is exported if it begins with a capital letter. For example Pizza
-is exported name, as Pi, which is exported from the math package:
+In Go, a name is exported if it begins with a capital letter. For example, Pizza is an exported name, as is Pi, which is exported from the math package:
 
--pizza and pi do not start with a capital letter , so they are not exported.
--when importing a package, we can not refer only to its exported names. Any "unexported"
-names are not accessible from outside the package.
+* pizza and pi do not start with a capital letter, so they are not exported.
+
+* When importing a package, we can only refer to its exported names. Any "unexported" names are not accessible from outside the package.
+
+* A function in Go can take zero or more arguments. We can notice that the type comes after the variable name.
 
 
-
-A function in Go can take zero or more arguments. We can 
-notice that the type comes after the variable name.
-
-```Go 
+```go
 package main
 
 import "fmt"
 
 func add(x int, y int) int {
-    return x + y
-  }
+  return x + y
+}
 
 func main() {
-    fmt.Println(add(42, 13))
-  }
-
+  fmt.Println(add(42, 13))
+}
 ```
 
-we can omit the type when two consecutive named function paramters share a type 
 
-```Go 
-x int , y int 
+We can omit the type when two consecutive named function parameters share a type.
 
+```go
+// instead of
+x int, y int
+// we can write
+x, y int
 
-to x , y int 
-
-func add(x , y int) int {
-
-  }
-
+func add(x, y int) int {
+  return x + y
+}
 ```
 
-A function can return any number of results
-
-```Go 
+A function can return any number of results.
+```go
 func swap(x, y string) (string, string) {
-    return y, x
-  }
+  return y, x
+}
 ```
-
 The swap function returns two strings
-
-
-
-
-
